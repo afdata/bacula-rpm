@@ -1,0 +1,9 @@
+diff -Naur bacula-7.0.3.old/src/cats/make_sqlite3_tables.in bacula-7.0.3/src/cats/make_sqlite3_tables.in
+--- bacula-7.0.3.old/src/cats/make_sqlite3_tables.in	2014-05-15 15:45:13.730148920 +0200
++++ bacula-7.0.3/src/cats/make_sqlite3_tables.in	2014-05-15 15:47:26.465692114 +0200
+@@ -458,4 +458,5 @@
+ END-OF-DATA
+ 
+ chmod 640 ${db_name}.db
++chown bacula:bacula ${db_name}.db
+ exit 0

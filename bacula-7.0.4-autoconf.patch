@@ -1,0 +1,35 @@
+diff -Naur bacula-7.0.4.old/autoconf/ltmain.sh bacula-7.0.4/autoconf/ltmain.sh
+--- bacula-7.0.4.old/autoconf/ltmain.sh	2014-07-24 17:43:23.085243360 +0200
++++ bacula-7.0.4/autoconf/ltmain.sh	2014-07-24 17:45:12.505330842 +0200
+@@ -2429,6 +2429,7 @@
+   -R[ ]LIBDIR       add LIBDIR to the runtime path of programs and libraries
+   -shared           only do dynamic linking of libtool libraries
+   -shrext SUFFIX    override the standard shared library file extension
++  -soname SONAME    override the standard shared object name
+   -static           do not do any dynamic linking of uninstalled libtool libraries
+   -static-libtool-libs
+                     do not do any dynamic linking of libtool libraries
+@@ -5434,6 +5435,11 @@
+ 	  prev=
+ 	  continue
+ 	  ;;
++	soname)
++	  soname_spec="$arg"
++	  prev=
++	  continue
++	  ;;
+ 	weak)
+ 	  func_append weak_libs " $arg"
+ 	  prev=
+@@ -5754,6 +5760,11 @@
+ 	continue
+ 	;;
+ 
++      -soname)
++   prev=soname
++   continue
++   ;;
++
+       -static | -static-libtool-libs)
+ 	# The effects of -static are defined in a previous loop.
+ 	# We used to do the same as -all-static on platforms that

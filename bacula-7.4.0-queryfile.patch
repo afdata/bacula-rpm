@@ -1,0 +1,38 @@
+diff -Naur bacula-7.0.0.old/src/dird/bacula-dir.conf.in bacula-7.0.0/src/dird/bacula-dir.conf.in
+--- bacula-7.0.0.old/src/dird/bacula-dir.conf.in	2014-03-29 10:00:03.000000000 +0100
++++ bacula-7.0.0/src/dird/bacula-dir.conf.in	2014-03-31 09:59:31.629996491 +0200
+@@ -15,7 +15,7 @@
+ Director {                            # define myself
+   Name = @basename@-dir
+   DIRport = @dir_port@                # where we listen for UA connections
+-  QueryFile = "@scriptdir@/query.sql"
++  QueryFile = "@sysconfdir@/query.sql"
+   WorkingDirectory = "@working_dir@"
+   PidDirectory = "@piddir@"
+   Maximum Concurrent Jobs = 20
+--- bacula-7.4.0.old/src/dird/Makefile.in	2016-01-15 17:57:18.000000000 +0100
++++ bacula-7.4.0/src/dird/Makefile.in	2016-01-20 17:53:41.863100520 +0100
+@@ -113,11 +113,11 @@ install: all
+ 	   @if test "x${dir_group}" != "x"; then \
+ 	      chgrp -f ${dir_group} ${DESTDIR}${sysconfdir}/$$destconf ; \
+ 	   fi
+-	@if  test -f ${DESTDIR}${scriptdir}/query.sql; then \
++	@if  test -f ${DESTDIR}${sysconfdir}/query.sql; then \
+ 	   echo "  ==> Saving existing query.sql to query.sql.old"; \
+-	   $(MV) -f ${DESTDIR}${scriptdir}/query.sql ${DESTDIR}${scriptdir}/query.sql.old; \
++	   $(MV) -f ${DESTDIR}${sysconfdir}/query.sql ${DESTDIR}${sysconfdir}/query.sql.old; \
+ 	fi
+-	${INSTALL_DATA} query.sql ${DESTDIR}${scriptdir}/query.sql
++	${INSTALL_DATA} query.sql ${DESTDIR}${sysconfdir}/query.sql
+ 	@if test -f static-bacula-dir; then \
+ 	   $(LIBTOOL_INSTALL) $(INSTALL_PROGRAM) static-bacula-dir $(DESTDIR)$(sbindir)/static-bacula-dir; \
+ 	fi
+@@ -125,7 +125,7 @@ install: all
+ 
+ uninstall:
+ 	(cd $(DESTDIR)$(sysconfdir); $(RMF) bacula-dir.conf bacula-dir.conf.new)
+-	(cd $(DESTDIR)$(scriptdir); $(RMF) query.sql)
++	(cd $(DESTDIR)$(sysconfdir); $(RMF) query.sql)
+ 
+ 
+ 

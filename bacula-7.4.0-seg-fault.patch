@@ -1,0 +1,20 @@
+--- bacula-7.4.0.old/src/lib/message.c	2016-01-15 17:57:18.000000000 +0100
++++ bacula-7.4.0/src/lib/message.c	2016-01-20 18:06:34.999216073 +0100
+@@ -28,6 +28,7 @@
+  *
+  */
+ 
++#include <assert.h>
+ #include "bacula.h"
+ #include "jcr.h"
+ 
+@@ -1329,7 +1330,8 @@ e_msg(const char *file, int line, int ty
+     if (type == M_ABORT) {
+        assert_msg = bstrdup(buf);
+        char *p = 0;
+-       p[0] = 0;                      /* generate segmentation violation */
++       // p[0] = 0;                      /* generate segmentation violation */
++       assert(p!=NULL);
+     }
+     if (type == M_ERROR_TERM) {
+        exit(1);
